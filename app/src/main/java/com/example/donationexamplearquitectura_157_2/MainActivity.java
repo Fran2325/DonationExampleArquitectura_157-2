@@ -2,38 +2,55 @@ package com.example.donationexamplearquitectura_157_2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.donationexamplearquitectura_157_2.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IViewPresenter {
 
     private ActivityMainBinding mBinding;
-    private Controller controller;
+    private DonationPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
-        controller = new Controller();
+        //No olvidar instanciar el presenter
+        presenter = new DonationPresenter(this);
         mBinding.button.setOnClickListener(v -> makeDonation());
     }
 
     private void makeDonation() {
-        boolean donation = controller.saveDonation(mBinding.etDonation.getText().toString());
-        if (donation){
-            int totalDonation = controller.totalDonation();
-            String total = getString(R.string.total_donation, String.valueOf(totalDonation));
-            mBinding.tvTotal.setText(total);
-            mBinding.etDonation.setText("");
-        } else {
-            showMessage("Donacion no realizada");
-        }
+      presenter.saveDonation(mBinding.etDonation.getText().toString());
+      mBinding.etDonation.setText("");
+      presenter.checkTotal();
     }
 
-    private void showMessage(String message){
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+
+    @Override
+    public void updateTotalDonation(int totalAmount) {
+        String total = getString(R.string.total_donation, String.valueOf(totalAmount));
+        mBinding.tvTotal.setText(total);
     }
+
+    @Override
+    public void displayConfirmationMessage() {
+        Toast.makeText(this, "Donación Realizada", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void displayErrorMessage() {
+        Toast.makeText(this, "Algo Ocurrio Error en la donación",
+                Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void displayColorAlert(String color) {
+        mBinding.textView.setBackgroundColor(Color.parseColor(color));
+    }
+
+
 }
