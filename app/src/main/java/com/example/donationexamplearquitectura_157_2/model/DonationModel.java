@@ -1,4 +1,4 @@
-package com.example.donationexamplearquitectura_157_2;
+package com.example.donationexamplearquitectura_157_2.model;
 
 import android.util.Log;
 
@@ -39,7 +39,6 @@ public class DonationModel {
             return "#FF3700B3";
         }
     }
-
 
 
     public int getDonationAmount() {

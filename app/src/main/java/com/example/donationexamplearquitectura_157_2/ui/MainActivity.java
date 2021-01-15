@@ -1,4 +1,4 @@
-package com.example.donationexamplearquitectura_157_2;
+package com.example.donationexamplearquitectura_157_2.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.donationexamplearquitectura_157_2.R;
 import com.example.donationexamplearquitectura_157_2.databinding.ActivityMainBinding;
+import com.example.donationexamplearquitectura_157_2.presentador.DonationPresenter;
+import com.example.donationexamplearquitectura_157_2.presentador.IViewPresenter;
 
 public class MainActivity extends AppCompatActivity implements IViewPresenter {
 
@@ -21,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements IViewPresenter {
         //No olvidar instanciar el presenter
         presenter = new DonationPresenter(this);
         mBinding.button.setOnClickListener(v -> makeDonation());
+
     }
 
     private void makeDonation() {

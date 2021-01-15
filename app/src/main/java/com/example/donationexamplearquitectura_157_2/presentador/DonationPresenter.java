@@ -1,4 +1,6 @@
-package com.example.donationexamplearquitectura_157_2;
+package com.example.donationexamplearquitectura_157_2.presentador;
+
+import com.example.donationexamplearquitectura_157_2.model.DonationModel;
 
 public class DonationPresenter {
 
